@@ -1,0 +1,24 @@
+Description: Properly zero out len when mail_fetch_body() returns an empty string
+Forwarded: no
+Origin: Vladimir Kolesnikov, https://bugs.launchpad.net/ubuntu/+source/uw-imap/+bug/617876/+attachment/1489969/+files/mail.c.diff
+Author: Vladimir Kolesnikov
+Reviewed-By: Daniel T Chen <crimsun@ubuntu.com>
+Bug-Ubuntu: https://bugs.launchpad.net/ubuntu/+source/uw-imap/+bug/617876
+Last-Update: 2011-07-28
+
+Index: uw-imap-2007e~dfsg/src/c-client/mail.c
+===================================================================
+--- uw-imap-2007e~dfsg.orig/src/c-client/mail.c	2011-07-28 18:30:59.000000000 -0400
++++ uw-imap-2007e~dfsg/src/c-client/mail.c	2011-07-28 18:34:25.000000000 -0400
+@@ -1938,7 +1938,10 @@
+   memset (&stream->private.string,NIL,sizeof (STRING));
+   if (!(section && *section))	/* top-level text wanted? */
+     return mail_fetch_message (stream,msgno,len,flags);
+-  else if (strlen (section) > (MAILTMPLEN - 20)) return "";
++  else if (strlen (section) > (MAILTMPLEN - 20)) {
++    if (len) *len = 0;
++    return "";
++  }
+   flags &= ~FT_INTERNAL;	/* can't win with this set */
+ 				/* initialize message data identifier */
+   INIT_GETS (md,stream,msgno,section,0,0);

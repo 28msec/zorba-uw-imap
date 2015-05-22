@@ -1,0 +1,2 @@
+ipopd: setgid-binary usr/sbin/ipop2d 2755 root/mail
+ipopd: setgid-binary usr/sbin/ipop3d 2755 root/mail

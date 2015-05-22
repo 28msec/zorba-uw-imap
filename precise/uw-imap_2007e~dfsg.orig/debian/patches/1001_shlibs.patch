@@ -1,0 +1,232 @@
+diff -ruN uw-imap-2006k~dfsg.orig/Makefile uw-imap-2006k~dfsg/Makefile
+--- uw-imap-2006k~dfsg.orig/Makefile	2007-11-08 00:16:50.000000000 +0100
++++ uw-imap-2006k~dfsg/Makefile	2007-12-10 15:58:39.000000000 +0100
+@@ -78,11 +78,13 @@
+ # hxd	HP-UX 10.x with DCE security (see shp)
+ # isc	Interactive Systems
+ # ldb	Debian Linux
++# ldbs	Debian Linux (Shared c-client lib)
+ # lfd	Fedora Core 4
+ # ln8	Linux for Nokia N800
+ # lnx	Linux with traditional passwords and crypt() in the C library
+ #	 (see lnp, sl4, sl5, and slx)
+ # lnp	Linux with Pluggable Authentication Modules (PAM)
++# lnps	Linux with Pluggable Authentication Modules (PAM, shared c-client lib)
+ # lmd	Mandrake Linux
+ # lr5	RedHat Enterprise 5 and later (same as lfd)
+ # lrh	RedHat Linux 7.2 and later
+@@ -306,7 +308,7 @@
+ 
+ # Note on SCO you may have to set LN to "ln".
+ 
+-a32 a41 aix bs3 bsi d-g d54 do4 drs epx ga4 gas gh9 ghp ghs go5 gsc gsg gso gul h11 hpp hpx lnp lyn mct mnt nec nto nxt nx3 osf os4 ptx qnx sc5 sco sgi sg6 shp sl4 sl5 slx snx soc sol sos uw2: an
++a32 a41 aix bs3 bsi d-g d54 do4 drs epx ga4 gas gh9 ghp ghs go5 gsc gsg gso gul h11 hpp hpx lnp lnps lyn mct mnt nec nto nxt nx3 osf os4 ptx qnx sc5 sco sgi sg6 shp sl4 sl5 slx snx soc sol sos uw2: an
+ 	$(BUILD) BUILDTYPE=$@
+ 
+ # If you use sv4, you may find that it works to move it to use the an process.
+@@ -371,6 +373,10 @@
+ 	$(BUILD) BUILDTYPE=lnp IP=$(IP6) \
+ 	SPECIALS="SSLINCLUDE=/usr/include/openssl SSLLIB=/usr/lib SSLCERTS=/etc/pki/tls/certs SSLKEYS=/etc/pki/tls/private GSSDIR=/usr/kerberos"
+ 
++ldbs:	an
++	$(BUILD) BUILDTYPE=lnps IP=$(IP6) \
++	SPECIALS="GSSDIR=/usr SSLDIR=/usr SSLINCLUDE=/usr/include/openssl SSLCERTS=/etc/ssl/certs SSLKEYS=/etc/ssl/private"
++
+ lmd:	an
+ 	$(BUILD) BUILDTYPE=lnp IP=$(IP6) \
+ 	SPECIALS="SSLINCLUDE=/usr/include/openssl SSLLIB=/usr/lib SSLCERTS=/usr/lib/ssl/certs SSLKEYS=/usr/lib/ssl/private GSSINCLUDE=/usr/include GSSLIB=/usr/lib"
+diff -ruN uw-imap-2006k~dfsg.orig/src/dmail/Makefile uw-imap-2006k~dfsg/src/dmail/Makefile
+--- uw-imap-2006k~dfsg.orig/src/dmail/Makefile	2007-09-11 01:56:35.000000000 +0200
++++ uw-imap-2006k~dfsg/src/dmail/Makefile	2007-12-10 16:00:26.000000000 +0100
+@@ -26,7 +26,7 @@
+ 
+ 
+ C = ../c-client
+-CCLIENTLIB = $C/c-client.a
++CCLIENTLIB = $C/`cat $C/ARCHIVENAME`
+ SHELL = /bin/sh
+ 
+ # Get local definitions from c-client directory
+@@ -35,16 +35,13 @@
+ CFLAGS = -I$C `cat $C/CFLAGS`
+ LDFLAGS = $(CCLIENTLIB) `cat $C/LDFLAGS`
+ 
+-dmail: $(CCLIENTLIB) dmail.o dquota.o
++dmail: dmail.o dquota.o
+ 	$(CC) $(CFLAGS) -o dmail dmail.o dquota.o $(LDFLAGS)
+ 
+ dmail.o: $C/mail.h $C/misc.h $C/osdep.h dquota.h
+ 
+ dquota.o: dquota.h
+ 
+-$(CCLIENTLIB):
+-	cd $C;make
+-
+ clean:
+ 	rm -f *.o dmail
+ 
+diff -ruN uw-imap-2006d.dfsg.orig/src/imapd/Makefile uw-imap-2006d.dfsg/src/imapd/Makefile
+--- uw-imap-2006d.dfsg.orig/src/imapd/Makefile	2006-08-31 02:10:44.000000000 +0200
++++ uw-imap-2006d.dfsg/src/imapd/Makefile	2006-12-19 22:11:49.000000000 +0100
+@@ -43,12 +43,12 @@
+ # Get local definitions from c-client directory
+ 
+ C = ../c-client
+-CCLIENTLIB = $C/c-client.a
++CCLIENTLIB = $C/`cat $C/ARCHIVENAME`
+ CC = `cat $C/CCTYPE`
+ CFLAGS = -I$C `cat $C/CFLAGS` $(NSBD) $(ENBD) -DANOFILE=\"$(ANO)\" \
+ 	-DALERTFILE=\"$(ALERT)\" -DNNTPFILE=\"$(NNTP)\" \
+ 	-DUSERALERTFILE=\"$(USERALERT)\" -DSHUTDOWNFILE=\"$(SHUTDOWN)\"
+-LDFLAGS = $(CCLIENTLIB) `cat $C/LDFLAGS`
++LDFLAGS = `cat $C/LDFLAGS`
+ 
+ all:	imapd
+ 
+diff -ruN uw-imap-2006d.dfsg.orig/src/ipopd/Makefile uw-imap-2006d.dfsg/src/ipopd/Makefile
+--- uw-imap-2006d.dfsg.orig/src/ipopd/Makefile	2006-08-31 02:17:30.000000000 +0200
++++ uw-imap-2006d.dfsg/src/ipopd/Makefile	2006-12-19 22:11:49.000000000 +0100
+@@ -26,14 +26,14 @@
+ 
+ 
+ C = ../c-client
+-CCLIENTLIB = $C/c-client.a
++CCLIENTLIB = $C/`cat $C/ARCHIVENAME`
+ SHELL = /bin/sh
+ 
+ # Get local definitions from c-client directory
+ 
+ CC = `cat $C/CCTYPE`
+ CFLAGS = -I$C `cat $C/CFLAGS`
+-LDFLAGS = $(CCLIENTLIB) `cat $C/LDFLAGS`
++LDFLAGS = `cat $C/LDFLAGS`
+ 
+ ipopd: ipop2d ipop3d
+ 
+diff -ruN uw-imap-2006d.dfsg.orig/src/mailutil/Makefile uw-imap-2006d.dfsg/src/mailutil/Makefile
+--- uw-imap-2006d.dfsg.orig/src/mailutil/Makefile	2006-08-31 02:21:20.000000000 +0200
++++ uw-imap-2006d.dfsg/src/mailutil/Makefile	2006-12-19 22:11:49.000000000 +0100
+@@ -26,7 +26,7 @@
+ 
+ 
+ C = ../c-client
+-CCLIENTLIB = $C/c-client.a
++CCLIENTLIB = $C/`cat $C/ARCHIVENAME`
+ SHELL = /bin/sh
+ 
+ # Get local definitions from c-client directory
+@@ -35,14 +35,11 @@
+ CFLAGS = -I$C `cat $C/CFLAGS`
+ LDFLAGS = $(CCLIENTLIB) `cat $C/LDFLAGS`
+ 
+-mailutil: $(CCLIENTLIB) mailutil.o
++mailutil: mailutil.o
+ 	$(CC) $(CFLAGS) -o mailutil mailutil.o $(LDFLAGS)
+ 
+ mailutil.o: $C/mail.h $C/misc.h $C/osdep.h
+ 
+-$(CCLIENTLIB):
+-	cd $C;make
+-
+ clean:
+ 	rm -f *.o mailutil
+ 
+diff -ruN uw-imap-2006d.dfsg.orig/src/mtest/Makefile uw-imap-2006d.dfsg/src/mtest/Makefile
+--- uw-imap-2006d.dfsg.orig/src/mtest/Makefile	2006-08-31 02:25:07.000000000 +0200
++++ uw-imap-2006d.dfsg/src/mtest/Makefile	2006-12-19 22:11:49.000000000 +0100
+@@ -26,7 +26,7 @@
+ 
+ 
+ C = ../c-client
+-CCLIENTLIB = $C/c-client.a
++CCLIENTLIB = $C/`cat $C/ARCHIVENAME`
+ SHELL = /bin/sh
+ 
+ # Get local definitions from c-client directory
+@@ -37,14 +37,11 @@
+ 
+ all:	mtest
+ 
+-mtest: $(CCLIENTLIB) mtest.o
++mtest: mtest.o
+ 	$(CC) $(CFLAGS) -o mtest mtest.o $(LDFLAGS)
+ 
+ mtest.o: $C/mail.h $C/misc.h $C/osdep.h $C/rfc822.h $C/smtp.h $C/nntp.h
+ 
+-$(CCLIENTLIB):
+-	cd $C;make
+-
+ clean:
+ 	rm -f *.o mtest || true
+ 
+diff -ruN uw-imap-2006d.dfsg.orig/src/osdep/unix/Makefile uw-imap-2006d.dfsg/src/osdep/unix/Makefile
+--- uw-imap-2006d.dfsg.orig/src/osdep/unix/Makefile	2006-12-08 02:24:54.000000000 +0100
++++ uw-imap-2006d.dfsg/src/osdep/unix/Makefile	2006-12-19 22:13:10.000000000 +0100
+@@ -490,7 +490,19 @@
+ 	 ACTIVEFILE=/var/lib/news/active \
+ 	 RSHPATH=/usr/bin/rsh \
+ 	 BASECFLAGS="$(GCCCFLAGS)" \
+-	 BASELDFLAGS="$(PAMLDFLAGS)"
++	 BASELDFLAGS="../c-client/c-client.a $(PAMLDFLAGS)"
++
++lnps:	# Linux Pluggable Authentication modules (c-client as shared lib)
++	$(BUILD) `$(CAT) SPECIALS` OS=lnx \
++	 SIGTYPE=psx CHECKPW=pam CRXTYPE=nfs \
++	 SPOOLDIR=/var/spool \
++	 ACTIVEFILE=/var/lib/news/active \
++	 RSHPATH=/usr/bin/rsh \
++	 BASECFLAGS="-fPIC $(GCCCFLAGS)" \
++	 ARCHIVE="libc-client.so" \
++	 BASELDFLAGS="-L../c-client -lc-client $(PAMLDFLAGS) -lc" \
++	 ARRC="gcc --shared -Wl,-soname,libc-client.so.$(VERSION) $(PAMLDFLAGS) -lc $(EXTRALDFLAGS) $(SSLLDFLAGS) -lgssapi_krb5 -lkrb5 -lk5crypto -lcom_err -o" \
++	 RANLIB=true
+ 
+ lnx:	# Linux non-shadow passwords
+ 	@echo You are building for traditional Linux *without* shadow
+@@ -861,7 +873,7 @@
+ # Cleanup
+ 
+ clean:
+-	sh -c '$(RM) auths.c crexcl.c ip_unix.c linkage.[ch] siglocal.c osdep*.[ch] *.o ARCHIVE *FLAGS *TYPE $(ARCHIVE) || true'
++	sh -c '$(RM) auths.c crexcl.c ip_unix.c linkage.[ch] siglocal.c osdep*.[ch] *.o ARCHIVE ARCHIVENAME *FLAGS *TYPE $(ARCHIVE) || true'
+ 
+ 
+ # Dependencies
+@@ -969,6 +981,7 @@
+ 	 -DLOCKPGM3=\"$(LOCKPGM3)\" > OSCFLAGS
+ 	echo $(BASELDFLAGS) $(EXTRALDFLAGS) > LDFLAGS
+ 	echo "$(ARRC) $(ARCHIVE) $(BINARIES);$(RANLIB) $(ARCHIVE)" > ARCHIVE
++	echo $(ARCHIVE) > ARCHIVENAME
+ 	echo $(OS) > OSTYPE
+ 	./drivers $(EXTRADRIVERS) $(DEFAULTDRIVERS) dummy
+ 	./mkauths $(EXTRAAUTHENTICATORS) $(DEFAULTAUTHENTICATORS)
+diff -ruN uw-imap-2006k~dfsg.orig/src/tmail/Makefile uw-imap-2006k~dfsg/src/tmail/Makefile
+--- uw-imap-2006k~dfsg.orig/src/tmail/Makefile	2007-12-10 16:26:58.000000000 +0100
++++ uw-imap-2006k~dfsg/src/tmail/Makefile	2007-12-10 16:28:07.000000000 +0100
+@@ -26,7 +26,7 @@
+ 
+ 
+ C = ../c-client
+-CCLIENTLIB = $C/c-client.a
++CCLIENTLIB = $C/`cat $C/ARCHIVENAME`
+ SHELL = /bin/sh
+ 
+ # Get local definitions from c-client directory
+@@ -35,16 +35,13 @@
+ CFLAGS = -I$C `cat $C/CFLAGS`
+ LDFLAGS = $(CCLIENTLIB) `cat $C/LDFLAGS`
+ 
+-tmail: $(CCLIENTLIB) tmail.o tquota.o
++tmail: tmail.o tquota.o
+ 	$(CC) $(CFLAGS) -o tmail tmail.o tquota.o $(LDFLAGS)
+ 
+ tmail.o: $C/mail.h $C/misc.h $C/osdep.h tquota.h
+ 
+ tquota.o: tquota.h
+ 
+-$(CCLIENTLIB):
+-	cd $C;make
+-
+ clean:
+ 	rm -f *.o tmail
+ 

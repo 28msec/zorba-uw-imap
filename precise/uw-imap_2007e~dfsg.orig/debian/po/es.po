@@ -1,0 +1,137 @@
+# translation of es.po to
+# uw-imap translation to spanish
+# Copyright (C) 2004 Software in the Public Interest
+# This file is distributed under the same license as the uw-imap package.
+#
+# Changes:
+# - Initial translation
+# - Reviewed
+#
+#  Traductores, si no conoce el formato PO, merece la pena leer la
+#  documentación de gettext, especialmente las secciones dedicadas a este
+#  formato, por ejemplo ejecutando:
+#         info -n '(gettext)PO Files'
+#         info -n '(gettext)Header Entry'
+#
+# Equipo de traducción al español, por favor lean antes de traducir
+# los siguientes documentos:
+#
+# - El proyecto de traducción de Debian al español
+#   http://www.debian.org/intl/spanish/coordinacion
+#   especialmente las notas de traducción en
+#   http://www.debian.org/intl/spanish/notas
+#
+# - La guía de traducción de po's de debconf:
+#   /usr/share/doc/po-debconf/README-trans
+#   o http://www.debian.org/intl/l10n/po-debconf/README-trans
+#
+#       Carlos Galisteo de Cabo <cgalisteo@k-rolus.net>, 2004, 2007.
+#       Rubén Porras Campo <nahoo@inicia.es>, 2004.
+msgid ""
+msgstr ""
+"Project-Id-Version: es\n"
+"Report-Msgid-Bugs-To: dr@jones.dk\n"
+"POT-Creation-Date: 2007-10-19 20:29+0200\n"
+"PO-Revision-Date: 2007-10-17 11:17+0200\n"
+"Last-Translator: Carlos Galisteo <cgalisteo@k-rolus.net>\n"
+"Language-Team:  <debian-l10n-spanish@lists.debian.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-15\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#. Type: multiselect
+#. Description
+#: ../ipopd.templates:2001 ../uw-imapd.templates:2001
+msgid "Server ports and protocols to support:"
+msgstr "Protocolos y puertos a soportar por el servidor:"
+
+#. Type: multiselect
+#. Description
+#: ../ipopd.templates:2001 ../uw-imapd.templates:2001
+msgid "Please choose the server ports and protocols to activate."
+msgstr ""
+"Por favor, elija los protocolos y los puertos a activar en el servidor."
+
+#. Type: multiselect
+#. Description
+#: ../ipopd.templates:2001
+msgid ""
+" pop3:  POP 3 on TCP port 110 with TLS support;\n"
+" pop3s: POP 3 on TCP port 995 with SSL support;\n"
+" pop2:  (obsolete) POP 2 on TCP port 109 with TLS support."
+msgstr ""
+" pop3: POP 3 en el puerto 110 TCP con soporte para TLS;\n"
+" pop3s: POP 3 en el puerto 995 TCP con soporte para SSL;\n"
+" pop2: (obsoleto) POP 2 en el puerto 109 TCP con soporte para TLS;"
+
+#. Type: multiselect
+#. Description
+#: ../ipopd.templates:2001
+msgid "It is recommended to activate both pop3 and pop3s."
+msgstr "Se recomienda activar ambos, pop3 y pop3s."
+
+#. Type: multiselect
+#. Description
+#. Type: boolean
+#. Description
+#: ../ipopd.templates:2001 ../ipopd.templates:3001
+msgid ""
+"As the ports and protocols choice may have been overridden by local changes, "
+"you may need to enforce the choice and run the package configuration again "
+"with 'dpkg-reconfigure ipopd'."
+msgstr ""
+"Dado que la elección de puertos y protocolos puede modificarse mediante "
+"cambios locales, puede que necesite forzar la elección y volver a configurar "
+"el paquete con «dpkg-reconfigure ipopd»."
+
+#. Type: boolean
+#. Description
+#: ../ipopd.templates:3001 ../uw-imapd.templates:3001
+msgid "Enforce port selection?"
+msgstr "¿Desea forzar la selección de puerto?"
+
+#. Type: boolean
+#. Description
+#: ../ipopd.templates:3001
+msgid "The ipopd daemon supports listening simultaneously on several ports."
+msgstr "El servicio ipopd permite escuchar simultáneamente en varios puertos."
+
+#. Type: multiselect
+#. Description
+#: ../uw-imapd.templates:2001
+msgid ""
+" imap2: IMAP 4rev1 on TCP port 143 with TLS support;\n"
+" imaps: IMAP 4rev1 on TCP port 993 with SSL support;\n"
+" imap3: (obsolete) IMAP 3 on TCP port 220 with TLS support."
+msgstr ""
+" imap2: IMAP 4rev1 en el puerto TCP 143 con soporte para TLS;\n"
+" imaps: IMAP 4rev1 en el puerto TCP 993 con soporte para SSL;\n"
+" imap3: (obsoleto) IMAP 3 en el puerto TCP 220 con soporte para TLS."
+
+#. Type: multiselect
+#. Description
+#: ../uw-imapd.templates:2001
+msgid "It is recommended to activate both imap2 and imaps."
+msgstr "Se recomienda activar ambos, imap2 e imaps."
+
+#. Type: multiselect
+#. Description
+#. Type: boolean
+#. Description
+#: ../uw-imapd.templates:2001 ../uw-imapd.templates:3001
+msgid ""
+"As the ports and protocols choice may have been overridden by local changes, "
+"you may need to enforce the choice and run the package configuration again "
+"with 'dpkg-reconfigure uw-imapd'."
+msgstr ""
+"Dado que la elección de puertos y protocolos puede modificarse mediante "
+"cambios locales, puede que necesite forzar la elección y volver a configurar "
+"el paquete con «dpkg-reconfigure uw-imapd»."
+
+#. Type: boolean
+#. Description
+#: ../uw-imapd.templates:3001
+msgid "The uw-imap daemon supports listening simultaneously on several ports."
+msgstr "El servicio ipopd permite escuchar simultáneamente en varios puertos."

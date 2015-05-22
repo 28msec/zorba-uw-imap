@@ -1,0 +1,1 @@
+uw-imapd: setgid-binary usr/sbin/imapd 2755 root/mail

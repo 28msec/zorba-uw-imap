@@ -1,0 +1,175 @@
+#
+#    Translators, if you are not familiar with the PO format, gettext
+#    documentation is worth reading, especially sections dedicated to
+#    this format, e.g. by running:
+#         info -n '(gettext)PO Files'
+#         info -n '(gettext)Header Entry'
+#
+#    Some information specific to po-debconf are available at
+#            /usr/share/doc/po-debconf/README-trans
+#         or http://www.debian.org/intl/l10n/po-debconf/README-trans
+#
+#    Developers do not need to manually edit POT or PO files.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: uw-imap\n"
+"Report-Msgid-Bugs-To: dr@jones.dk\n"
+"POT-Creation-Date: 2007-10-19 20:29+0200\n"
+"PO-Revision-Date: 2007-10-21 10:29+0200\n"
+"Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
+"Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: multiselect
+#. Description
+#: ../ipopd.templates:2001 ../uw-imapd.templates:2001
+msgid "Server ports and protocols to support:"
+msgstr "Protokoly a porty, které má server podporovat:"
+
+#. Type: multiselect
+#. Description
+#: ../ipopd.templates:2001 ../uw-imapd.templates:2001
+msgid "Please choose the server ports and protocols to activate."
+msgstr "Vyberte prosím porty a protokoly, které se mají na serveru povolit."
+
+#. Type: multiselect
+#. Description
+#: ../ipopd.templates:2001
+msgid ""
+" pop3:  POP 3 on TCP port 110 with TLS support;\n"
+" pop3s: POP 3 on TCP port 995 with SSL support;\n"
+" pop2:  (obsolete) POP 2 on TCP port 109 with TLS support."
+msgstr ""
+" pop3:  POP 3 na TCP portu 110 s podporou TLS;\n"
+" pop3s: POP 3 na TCP portu 995 s podporou SSL;\n"
+" pop2:  (zastaralý) POP 2 na TCP portu 109 s podporou TLS."
+
+#. Type: multiselect
+#. Description
+#: ../ipopd.templates:2001
+msgid "It is recommended to activate both pop3 and pop3s."
+msgstr "Doporučuje se aktivovat jak pop3, tak pop3s."
+
+#. Type: multiselect
+#. Description
+#. Type: boolean
+#. Description
+#: ../ipopd.templates:2001 ../ipopd.templates:3001
+msgid ""
+"As the ports and protocols choice may have been overridden by local changes, "
+"you may need to enforce the choice and run the package configuration again "
+"with 'dpkg-reconfigure ipopd'."
+msgstr ""
+"Protože se může stát, že si zde nastavené porty a protokoly později "
+"přepíšete lokálními úpravami konfiguračního souboru, můžete vynutit toto "
+"nastavení spuštěním příkazu „dpkg-reconfigure ipopd“."
+
+#. Type: boolean
+#. Description
+#: ../ipopd.templates:3001 ../uw-imapd.templates:3001
+msgid "Enforce port selection?"
+msgstr "Vynutit výběr portů?"
+
+#. Type: boolean
+#. Description
+#: ../ipopd.templates:3001
+msgid "The ipopd daemon supports listening simultaneously on several ports."
+msgstr "Daemon ipopd umí naslouchat na více portech zároveň."
+
+#. Type: multiselect
+#. Description
+#: ../uw-imapd.templates:2001
+msgid ""
+" imap2: IMAP 4rev1 on TCP port 143 with TLS support;\n"
+" imaps: IMAP 4rev1 on TCP port 993 with SSL support;\n"
+" imap3: (obsolete) IMAP 3 on TCP port 220 with TLS support."
+msgstr ""
+" imap2: IMAP 4rev1 na TCP portu 143 s podporou TLS;\n"
+" imaps: IMAP 4rev1 na TCP portu 993 s podporou SSL;\n"
+" imap3: (zastaralý) IMAP 3 na TCP portu 220 s podporou TLS."
+
+#. Type: multiselect
+#. Description
+#: ../uw-imapd.templates:2001
+msgid "It is recommended to activate both imap2 and imaps."
+msgstr "Doporučuje se aktivovat jak imap2, tak imaps."
+
+#. Type: multiselect
+#. Description
+#. Type: boolean
+#. Description
+#: ../uw-imapd.templates:2001 ../uw-imapd.templates:3001
+msgid ""
+"As the ports and protocols choice may have been overridden by local changes, "
+"you may need to enforce the choice and run the package configuration again "
+"with 'dpkg-reconfigure uw-imapd'."
+msgstr ""
+"Protože se může stát, že si zde nastavené porty a protokoly později "
+"přepíšete lokálními úpravami konfiguračního souboru, můžete vynutit toto "
+"nastavení spuštěním příkazu „dpkg-reconfigure uw-imapd“."
+
+#. Type: boolean
+#. Description
+#: ../uw-imapd.templates:3001
+msgid "The uw-imap daemon supports listening simultaneously on several ports."
+msgstr "Daemon uw-imap umí naslouchat na více portech zároveň."
+
+#~ msgid "If in doubt, choose pop3 and pop3s."
+#~ msgstr "Pokud si nejste jisti, vyberte pop3 a pop3s."
+
+#~ msgid "Which ports should the server listen on?"
+#~ msgstr "Na kterých portech má server naslouchat?"
+
+#~ msgid "Continue installing libc-client without Maildir support?"
+#~ msgstr "Pokračovat v instalaci libc-client bez podpory Maildiru?"
+
+#~ msgid ""
+#~ "Libc-client earlier than version 2002d (and development versions of 2003) "
+#~ "included an unofficial and no longer maintained patch to support "
+#~ "Maildirs. By default Maildirs were not used by uw-imapd or ipopd, but if "
+#~ "you have changed your system configuration or other installed programs "
+#~ "depend on libc-client then upgrading may result in broken mail handling."
+#~ msgstr ""
+#~ "Libc-client dřívější než verze 2002d (a vývojové verze 2003) obsahovaly "
+#~ "neoficiální záplatu pro podporu schránek typu Maildir. Implicitně se tyto "
+#~ "schránky nepoužívaly ani v uw-imapd ani v ipopd. Pokud jste ale změnili "
+#~ "nastavení, nebo pokud na libc-client závisí jiné instalované programy, "
+#~ "tak se může stát, že aktualizace programu způsobí porušené zpracování "
+#~ "pošty."
+
+#~ msgid ""
+#~ "Do you want to continue installing a libc-client without Maildir support?"
+#~ msgstr "Chcete pokračovat v instalaci libc-client bez podpory Maildiru?"
+
+#~ msgid "Allow insecure authentication using plaintext passwords?"
+#~ msgstr "Povolit nebezpečnou autentizaci pomocí nešifrovaných hesel?"
+
+#~ msgid ""
+#~ "The use of unencrypted plaintext passwords is generally insecure, and the "
+#~ "current version of libc-client by default only allows network access "
+#~ "through either TLS or SSL connections.  This affects uw-imapd, ipopd and "
+#~ "any other programs that use libc-client for mail access through the "
+#~ "network.  However, this functionality can be changed by using the semi-"
+#~ "official /etc/c-client.cf configuration file.  Read more about this in /"
+#~ "usr/share/doc/libc-client__VER__/README.Debian."
+#~ msgstr ""
+#~ "Použití nešifrovaných hesel je obecně nebezpečné a aktuální verze libc-"
+#~ "client dovoluje implicitně pouze přístup přes TLS nebo SSL spojení. To má "
+#~ "vliv na uw-imapd, ipopd a všechny ostatní programy, které k poště na síti "
+#~ "přistupují přes libc-client. Toto chování se dá změnit polooficiálním "
+#~ "konfiguračním souborem /etc/c-client.cf. Více se dozvíte v /usr/share/doc/"
+#~ "libc-client__VER__/README.Debian."
+
+#~ msgid ""
+#~ "Do you want to allow email access authentication using insecure plaintext "
+#~ "passwords?"
+#~ msgstr ""
+#~ "Chcete povolit autentizaci pro přístup k poště pomocí nebezpečných "
+#~ "nešifrovaných hesel?"
+
+#~ msgid "Note: cramd-md5 passwords are treated as plaintext passwords!"
+#~ msgstr "Poznámka: hesla cramd-md5 se berou jako nezašifrovaná!"

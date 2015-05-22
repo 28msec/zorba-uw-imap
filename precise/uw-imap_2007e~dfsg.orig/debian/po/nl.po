@@ -1,0 +1,186 @@
+#
+#    Translators, if you are not familiar with the PO format, gettext
+#    documentation is worth reading, especially sections dedicated to
+#    this format, e.g. by running:
+#         info -n '(gettext)PO Files'
+#         info -n '(gettext)Header Entry'
+#
+#    Some information specific to po-debconf are available at
+#            /usr/share/doc/po-debconf/README-trans
+#         or http://www.debian.org/intl/l10n/po-debconf/README-trans
+#
+#    Developers do not need to manually edit POT or PO files.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: uw-imap 7:2002edebian1-13\n"
+"Report-Msgid-Bugs-To: dr@jones.dk\n"
+"POT-Creation-Date: 2007-10-19 20:29+0200\n"
+"PO-Revision-Date: 2006-04-21 21:00+0100\n"
+"Last-Translator: Vincent Zweije <zweije@xs4all.nl>\n"
+"Language-Team: Debian-Dutch <debian-l10n-dutch@lists.debian.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-15\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: multiselect
+#. Description
+#: ../ipopd.templates:2001 ../uw-imapd.templates:2001
+msgid "Server ports and protocols to support:"
+msgstr ""
+
+#. Type: multiselect
+#. Description
+#: ../ipopd.templates:2001 ../uw-imapd.templates:2001
+msgid "Please choose the server ports and protocols to activate."
+msgstr ""
+
+#. Type: multiselect
+#. Description
+#: ../ipopd.templates:2001
+msgid ""
+" pop3:  POP 3 on TCP port 110 with TLS support;\n"
+" pop3s: POP 3 on TCP port 995 with SSL support;\n"
+" pop2:  (obsolete) POP 2 on TCP port 109 with TLS support."
+msgstr ""
+
+#. Type: multiselect
+#. Description
+#: ../ipopd.templates:2001
+msgid "It is recommended to activate both pop3 and pop3s."
+msgstr ""
+
+#. Type: multiselect
+#. Description
+#. Type: boolean
+#. Description
+#: ../ipopd.templates:2001 ../ipopd.templates:3001
+msgid ""
+"As the ports and protocols choice may have been overridden by local changes, "
+"you may need to enforce the choice and run the package configuration again "
+"with 'dpkg-reconfigure ipopd'."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../ipopd.templates:3001 ../uw-imapd.templates:3001
+msgid "Enforce port selection?"
+msgstr "Gekozen poorten afdwingen?"
+
+#. Type: boolean
+#. Description
+#: ../ipopd.templates:3001
+msgid "The ipopd daemon supports listening simultaneously on several ports."
+msgstr ""
+
+#. Type: multiselect
+#. Description
+#: ../uw-imapd.templates:2001
+msgid ""
+" imap2: IMAP 4rev1 on TCP port 143 with TLS support;\n"
+" imaps: IMAP 4rev1 on TCP port 993 with SSL support;\n"
+" imap3: (obsolete) IMAP 3 on TCP port 220 with TLS support."
+msgstr ""
+
+#. Type: multiselect
+#. Description
+#: ../uw-imapd.templates:2001
+msgid "It is recommended to activate both imap2 and imaps."
+msgstr ""
+
+#. Type: multiselect
+#. Description
+#. Type: boolean
+#. Description
+#: ../uw-imapd.templates:2001 ../uw-imapd.templates:3001
+msgid ""
+"As the ports and protocols choice may have been overridden by local changes, "
+"you may need to enforce the choice and run the package configuration again "
+"with 'dpkg-reconfigure uw-imapd'."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../uw-imapd.templates:3001
+msgid "The uw-imap daemon supports listening simultaneously on several ports."
+msgstr ""
+
+#~ msgid "pop2 =  POP 2 on TCP port 109 with TLS support.  This is obsolete."
+#~ msgstr ""
+#~ "pop2 = POP 2 op TCP poort 109 met TLS-ondersteuning. Dit is verouderd."
+
+#~ msgid "pop3  = POP 3 on TCP port 110 with TLS support."
+#~ msgstr "pop3 = POP 3 op TCP poort 110 met TLS-ondersteuning."
+
+#~ msgid "pop3s = POP 3 on TCP port 995 with SSL support."
+#~ msgstr "pop3s = POP 3 op TCP poort 995 met SSL-ondersteuning."
+
+#~ msgid "If in doubt, choose pop3 and pop3s."
+#~ msgstr "Als u twijfelt, kies dan pop3 en pop3s."
+
+#, fuzzy
+#~| msgid ""
+#~| "The ports selected for enabling may be overridden by locally configured "
+#~| "services. By default the port selection is respected only on initial "
+#~| "installs, and is ignored on later reconfiguration."
+#~ msgid ""
+#~ "By default the port selection is respected only on initial installs, and "
+#~ "is ignored on later updates and reconfiguration."
+#~ msgstr ""
+#~ "Locaal ingestelde diensten kunnen voorgaan op de poorten die handmatig "
+#~ "zijn ingesteld. Standaard worden de handmatig ingestelde poorten alleen "
+#~ "gebruikt bij de eerste installatie, maar niet bij latere herconfiguratie."
+
+#~ msgid ""
+#~ "imap2 = IMAP 4Rev1 (not 2, strangely enough) on TCP port 143 with TLS "
+#~ "support."
+#~ msgstr ""
+#~ "imap2 = IMAP 4Rev1 (merkwaardigerwijs niet 2) op TCP poort 143 met TLS-"
+#~ "ondersteuning."
+
+#~ msgid "imap3 = IMAP 3 on TCP port 220 with TLS support.  This is obsolete."
+#~ msgstr ""
+#~ "imap3 = IMAP 3 op TCP poort 220 met TLS-ondersteuning. Dit is verouderd."
+
+#~ msgid "imaps = IMAP 4Rev1 on TCP port 993 with SSL support."
+#~ msgstr "imaps = IMAP 4Rev1 op TCP poort 993 met SSL-ondersteuning."
+
+#, fuzzy
+#~| msgid "If in doubt, pick imap2 and imaps."
+#~ msgid "If in doubt, choose imap2 and imaps."
+#~ msgstr "Als u twijfelt, kies dan imap2 en imaps."
+
+#~ msgid "Which ports should the server listen on?"
+#~ msgstr "Op welke poorten moet de server luisteren?"
+
+#~ msgid ""
+#~ "Do you want to ignore possible local tweaks and always use selected ports?"
+#~ msgstr ""
+#~ "Wilt u mogelijke locale instellingen negeren en altijd de geselecteerde "
+#~ "poorten gebruiken?"
+
+#~ msgid "Continue installing libc-client without Maildir support?"
+#~ msgstr ""
+#~ "Verder gaan met het installeren van libc-client zonder Maildir-"
+#~ "ondersteuning?"
+
+#~ msgid ""
+#~ "Libc-client earlier than version 2002d (and development versions of 2003) "
+#~ "included an unofficial and no longer maintained patch to support "
+#~ "Maildirs. By default Maildirs were not used by uw-imapd or ipopd, but if "
+#~ "you have changed your system configuration or other installed programs "
+#~ "depend on libc-client then upgrading may result in broken mail handling."
+#~ msgstr ""
+#~ "Libc-client versies voor 2002d (en ontwikkelaarsversies van 2003) "
+#~ "bevatten een onofficiële en niet langer ondersteunde wijziging om "
+#~ "Maildirs te ondersteunen. Standaard werden Maildirs niet gebruikt door uw-"
+#~ "imapd of ipopd, maar indien u uw systeeminstellingen hebt gewijzigd of "
+#~ "programma's hebt geïnstalleerd die afhankelijk zijn van libc-client, dan "
+#~ "kan mail-afhandeling door de opwaardering defect raken."
+
+#~ msgid ""
+#~ "Do you want to continue installing a libc-client without Maildir support?"
+#~ msgstr ""
+#~ "Wilt u doorgaan met het installeren van een libc-client zonder Maildir-"
+#~ "ondersteuning?"

@@ -1,0 +1,227 @@
+# Turkish translation of uw-imap.
+# This file is distributed under the same license as the uw-imap package.
+# Mehmet Türker <mturker@innova.com.tr>, 2004.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: uw-imap\n"
+"Report-Msgid-Bugs-To: dr@jones.dk\n"
+"POT-Creation-Date: 2007-10-19 20:29+0200\n"
+"PO-Revision-Date: 2007-10-16 13:57+0200\n"
+"Last-Translator: Mehmet Türker <mturker@innova.com.tr>\n"
+"Language-Team: Turkish <debian-l10n-turkish@lists.debian.org>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: multiselect
+#. Description
+#: ../ipopd.templates:2001 ../uw-imapd.templates:2001
+msgid "Server ports and protocols to support:"
+msgstr "Desteklenecek sunucu port ve protokolleri:"
+
+#. Type: multiselect
+#. Description
+#: ../ipopd.templates:2001 ../uw-imapd.templates:2001
+msgid "Please choose the server ports and protocols to activate."
+msgstr "Etkinleştirilecek sunucu port ve protokollerini seçin."
+
+#. Type: multiselect
+#. Description
+#: ../ipopd.templates:2001
+msgid ""
+" pop3:  POP 3 on TCP port 110 with TLS support;\n"
+" pop3s: POP 3 on TCP port 995 with SSL support;\n"
+" pop2:  (obsolete) POP 2 on TCP port 109 with TLS support."
+msgstr ""
+" pop3:  TCP port 110 da TLS desteği ile çalışan POP 3;\n"
+" pop3s:  TCP port 995 te SSL desteği ile çalışan POP 3;\n"
+" pop2:  TCP port 109 da TLS desteği ile çalışan (demode) POP 2."
+
+#. Type: multiselect
+#. Description
+#: ../ipopd.templates:2001
+msgid "It is recommended to activate both pop3 and pop3s."
+msgstr "Hem pop3 hem de pop3s 'in etkinleştirilmesi tavsiye edilir."
+
+#. Type: multiselect
+#. Description
+#. Type: boolean
+#. Description
+#: ../ipopd.templates:2001 ../ipopd.templates:3001
+msgid ""
+"As the ports and protocols choice may have been overridden by local changes, "
+"you may need to enforce the choice and run the package configuration again "
+"with 'dpkg-reconfigure ipopd'."
+msgstr ""
+"Port ve protokol seçenekleri yerel değişiklikler sebebiyle "
+"kaybolabileceğinden, seçenekleri mecbur kılmanız ve yapılandırmayı 'dpkg-"
+"reconfigure ipopd' komutuyla tekrarlamanız gerekebilir."
+
+#. Type: boolean
+#. Description
+#: ../ipopd.templates:3001 ../uw-imapd.templates:3001
+msgid "Enforce port selection?"
+msgstr "Port seçimini mecbur kıl?"
+
+#. Type: boolean
+#. Description
+#: ../ipopd.templates:3001
+msgid "The ipopd daemon supports listening simultaneously on several ports."
+msgstr ""
+"Ipopd servisi aynı anda birden fazla portta dinleme yapma yeteneğindedir."
+
+#. Type: multiselect
+#. Description
+#: ../uw-imapd.templates:2001
+msgid ""
+" imap2: IMAP 4rev1 on TCP port 143 with TLS support;\n"
+" imaps: IMAP 4rev1 on TCP port 993 with SSL support;\n"
+" imap3: (obsolete) IMAP 3 on TCP port 220 with TLS support."
+msgstr ""
+" imap2: TCP port 143 te TLS desteği ile çalışan IMAP 4rev1;\n"
+" imaps: TCP port 993 te SSL desteği ile çalışan IMAP 4rev1;\n"
+" imap3: TCP port 220 de TLS desteği ile çalışan (demode) IMAP 3."
+
+#. Type: multiselect
+#. Description
+#: ../uw-imapd.templates:2001
+msgid "It is recommended to activate both imap2 and imaps."
+msgstr "Hem imap2 hem de imaps etkinleştirilmesi tavsiye edilir."
+
+#. Type: multiselect
+#. Description
+#. Type: boolean
+#. Description
+#: ../uw-imapd.templates:2001 ../uw-imapd.templates:3001
+msgid ""
+"As the ports and protocols choice may have been overridden by local changes, "
+"you may need to enforce the choice and run the package configuration again "
+"with 'dpkg-reconfigure uw-imapd'."
+msgstr ""
+"Port ve protokol seçenekleri yerel değişiklikler sebebiyle "
+"kaybolabileceğinden, seçenekleri mecbur kılmanız ve yapılandırmayı 'dpkg-"
+"reconfigure uw-imapd' komutuyla tekrarlamanız gerekebilir."
+
+#. Type: boolean
+#. Description
+#: ../uw-imapd.templates:3001
+msgid "The uw-imap daemon supports listening simultaneously on several ports."
+msgstr ""
+"Uw-imap servisi aynı anda birden fazla portta dinleme yapma yeteneğindedir."
+
+#~ msgid "pop2 =  POP 2 on TCP port 109 with TLS support.  This is obsolete."
+#~ msgstr ""
+#~ "pop2 =  TCP port 109 üzerinde TLS desteğiyle POP 2.  Bu ayar artık "
+#~ "eskimiştir."
+
+#~ msgid "pop3  = POP 3 on TCP port 110 with TLS support."
+#~ msgstr "pop3  = TCP port 110 üzerinde TLS desteği ile POP 3."
+
+#~ msgid "pop3s = POP 3 on TCP port 995 with SSL support."
+#~ msgstr "pop3s = TCP port 995 üzerinde SSL desteği ile POP 3."
+
+#~ msgid "If in doubt, choose pop3 and pop3s."
+#~ msgstr "Eğer kararsız kaldıysanız, pop3 ve pop3s'i seçiniz."
+
+#, fuzzy
+#~ msgid ""
+#~ "By default the port selection is respected only on initial installs, and "
+#~ "is ignored on later updates and reconfiguration."
+#~ msgstr ""
+#~ "Etkinleştirmek üzere seçilen portlar yerel olarak yapılandırılan "
+#~ "servisler tarafından değiştirilmiş olabilir. Öntanımlı olarak, port "
+#~ "seçimi sadece ilk kurulumlar için geçerlidir ve sonraki yapılandırmalarda "
+#~ "dikkate alınmaz."
+
+#~ msgid ""
+#~ "imap2 = IMAP 4Rev1 (not 2, strangely enough) on TCP port 143 with TLS "
+#~ "support."
+#~ msgstr ""
+#~ "imap2 = TCP port 143 üzerinde TLS desteğiyle IMAP 4Rev1 (tuhaf şekilde, 2 "
+#~ "değil)."
+
+#~ msgid "imap3 = IMAP 3 on TCP port 220 with TLS support.  This is obsolete."
+#~ msgstr ""
+#~ "imap3 = TCP port 220 üzerinde TLS desteğiyle IMAP 3.  Bu ayar artık "
+#~ "eskimiştir."
+
+#~ msgid "imaps = IMAP 4Rev1 on TCP port 993 with SSL support."
+#~ msgstr "imaps = TCP port 993 üzerinde SSL desteğiyle IMAP 4Rev1."
+
+#, fuzzy
+#~ msgid "If in doubt, choose imap2 and imaps."
+#~ msgstr "Eğer kararsız kaldıysanız, imap2 ve imaps'i seçin."
+
+#~ msgid "Which ports should the server listen on?"
+#~ msgstr "Sunucu hangi portları dinlemeli?"
+
+#~ msgid ""
+#~ "Do you want to ignore possible local tweaks and always use selected ports?"
+#~ msgstr ""
+#~ "Mümkün olan yerel iyileştirme ayarlarını yoksaymayı ve herzaman seçilen "
+#~ "portları kullanmak istiyormusun?"
+
+#~ msgid "Continue installing libc-client without Maildir support?"
+#~ msgstr ""
+#~ "\"libc-client\" kurulumuna Maildir desteği olmadan devam edilsin mi?"
+
+#~ msgid ""
+#~ "Libc-client earlier than version 2002d (and development versions of 2003) "
+#~ "included an unofficial and no longer maintained patch to support "
+#~ "Maildirs. By default Maildirs were not used by uw-imapd or ipopd, but if "
+#~ "you have changed your system configuration or other installed programs "
+#~ "depend on libc-client then upgrading may result in broken mail handling."
+#~ msgstr ""
+#~ "Sürüm 2002d'den daha yeni libc-client (ve 2003'ün geliştirme sürümleri) "
+#~ "resmî olmayan ve Maildir desteği için artık desteklenmeyen bir yama "
+#~ "içeriyordu.  Uw-imapd veya ipod öntanımlı olarak Maildir biçemini "
+#~ "kullanmıyordu.  Fakat eğer sistem yapılandırmanızı değiştirdiyseniz veya "
+#~ "libc-client'a bağımlı uygulamalar kurduysanız güncelleştirme bozuk bir e-"
+#~ "posta yönetimine yol açabilir."
+
+#~ msgid ""
+#~ "Do you want to continue installing a libc-client without Maildir support?"
+#~ msgstr ""
+#~ "\"libc-client\" kurulumuna Maildir desteği olmadan devam etmek "
+#~ "istermisiniz?"
+
+#~ msgid "pop2, pop3, pop3s"
+#~ msgstr "pop2, pop3, pop3s"
+
+#~ msgid "imap2, imap3, imaps"
+#~ msgstr "imap2, imap3, imaps"
+
+#~ msgid "Allow insecure authentication using plaintext passwords?"
+#~ msgstr ""
+#~ "Düz metin parolaları kullanarak güvenli olmayan kimlik doğrulamaya izin "
+#~ "verilsin mi?"
+
+#~ msgid ""
+#~ "The use of unencrypted plaintext passwords is generally insecure, and the "
+#~ "current version of libc-client by default only allows network access "
+#~ "through either TLS or SSL connections.  This affects uw-imapd, ipopd and "
+#~ "any other programs that use libc-client for mail access through the "
+#~ "network.  However, this functionality can be changed by using the semi-"
+#~ "official /etc/c-client.cf configuration file.  Read more about this in /"
+#~ "usr/share/doc/libc-client__VER__/README.Debian."
+#~ msgstr ""
+#~ "Şifrelenmemiş düz metin parolalarının kullanımı genellikle güvenli "
+#~ "değildir ve libc-client'ın yürürlükteki sürümü öntanımlı olarak ağa "
+#~ "ulaşmak için sadece TLS veya SSL bağlantılara izin vermektedir.  Bu "
+#~ "durum; uw-imapd, ipopd ve ağ üzerinde e-posta girişi için libc-client'i "
+#~ "kullanan bütün diğer uygulamaları da etkiler.  Bununla birlikte bu işlev "
+#~ "yarı-resmî /etc/c-client.cf yapılandırma dosyası kullanılarak "
+#~ "değiştirilebilir.  Bu konu hakkında /usr/share/doc/libc-client__VER__/"
+#~ "README.Debian dosyasında daha fazla bilgi bulabilirsiniz."
+
+#~ msgid ""
+#~ "Do you want to allow email access authentication using insecure plaintext "
+#~ "passwords?"
+#~ msgstr ""
+#~ "Güvenli olmayan düz metin parolalarını kullanarak e-posta giriş "
+#~ "doğrulaması yapılmasına izin verilsin mi?"
+
+#~ msgid "Note: cramd-md5 passwords are treated as plaintext passwords!"
+#~ msgstr "Not: cramd-md5 parolaları düz metin parolalar gibi işlem görür!"

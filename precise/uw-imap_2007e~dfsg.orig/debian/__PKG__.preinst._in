@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+
+pkg="__PKG__"	# basename of package
+daemonsets="__DAEMONSETS__"	# space-seperated list of colon-seperated list of port and binary name (or path if not /usr/sbin)
+
+cachefile=/var/cache/${pkg}_inetd.conf_copy
+
+if [ "$1" = "upgrade" ] && dpkg --compare-versions "$2" le 7:2002edebian1-6; then
+	# See Bug#295306: the postrm that will be called after unpacking
+	# will remove entries from /etc/inetd.conf, so we save them for
+	# restoring them in the postinst.
+	rm -f "$cachefile"
+	for daemonset in $daemonsets; do
+		service="`echo "$daemonset" | awk -F: '{ print $1 }'`"
+		binary="`echo "$daemonset" | awk -F: '{ print $2 }' | sed 's,^\([^/]\),/usr/sbin/\1,'`"
+		egrep "^([#]|#<off>)#[:space:]+?$service[:space:]" /etc/inetd.conf >>"$cachefile" || [ $? -lt 2 ] # catch grep failures
+	done
+fi

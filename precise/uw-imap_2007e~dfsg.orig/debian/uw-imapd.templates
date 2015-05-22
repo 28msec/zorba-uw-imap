@@ -1,0 +1,35 @@
+# These templates have been reviewed by the debian-l10n-english
+# team
+#
+# If modifications/additions/rewording are needed, please ask
+# debian-l10n-english@lists.debian.org for advice.
+#
+# Even minor modifications require translation updates and such
+# changes should be coordinated with translators and reviewers.
+
+Template: uw-imapd/protocol
+Type: multiselect
+Choices: imap2, imaps, imap3
+Default: imap2, imaps
+_Description: Server ports and protocols to support:
+ Please choose the server ports and protocols to activate.
+ .
+  imap2: IMAP 4rev1 on TCP port 143 with TLS support;
+  imaps: IMAP 4rev1 on TCP port 993 with SSL support;
+  imap3: (obsolete) IMAP 3 on TCP port 220 with TLS support.
+ .
+ It is recommended to activate both imap2 and imaps.
+ .
+ As the ports and protocols choice may have been overridden by local
+ changes, you may need to enforce the choice and run the package
+ configuration again with 'dpkg-reconfigure uw-imapd'.
+
+Template: uw-imapd/force_debconf_choice
+Type: boolean
+Default: false
+_Description: Enforce port selection?
+ The uw-imap daemon supports listening simultaneously on several ports.
+ .
+ As the ports and protocols choice may have been overridden by local
+ changes, you may need to enforce the choice and run the package
+ configuration again with 'dpkg-reconfigure uw-imapd'.

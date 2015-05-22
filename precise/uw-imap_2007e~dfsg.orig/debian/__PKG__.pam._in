@@ -1,0 +1,10 @@
+#
+# The PAM configuration file for the UW IMAPd `__PAMSERVICE__' service
+#
+
+# The standard Unix authentication modules, used with
+# NIS (man nsswitch) as well as normal /etc/passwd and
+# /etc/shadow entries.
+@include common-auth
+@include common-account
+@include common-session-noninteractive

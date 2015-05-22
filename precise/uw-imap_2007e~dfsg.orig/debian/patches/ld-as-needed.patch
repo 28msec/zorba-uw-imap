@@ -1,0 +1,21 @@
+--- ./src/osdep/unix/Makefile	2011-09-14 00:50:28.976911619 +0200
++++ ./src/osdep/unix/Makefile	2011-09-14 00:46:12.286535127 +0200
+@@ -501,7 +501,8 @@
+ 	 BASECFLAGS="-fPIC $(GCCCFLAGS)" \
+ 	 ARCHIVE="libc-client.so" \
+ 	 BASELDFLAGS="-L../c-client -lc-client $(PAMLDFLAGS) -lc" \
+-	 ARRC="gcc --shared -Wl,-soname,libc-client.so.$(VERSION) $(PAMLDFLAGS) -lc $(EXTRALDFLAGS) $(SSLLDFLAGS) -lgssapi_krb5 -lkrb5 -lk5crypto -lcom_err -o" \
++	 ARRC="gcc --shared -Wl,-soname,libc-client.so.$(VERSION) -o" \
++	 LIBRARIES="$(PAMLDFLAGS) $(EXTRALDFLAGS) $(SSLLDFLAGS) -lgssapi_krb5 -lkrb5 -lk5crypto -lcom_err" \
+ 	 RANLIB=true
+ 
+ lnx:	# Linux non-shadow passwords
+@@ -980,7 +981,7 @@
+ 	 -DLOCKPGM1=\"$(LOCKPGM1)\" -DLOCKPGM2=\"$(LOCKPGM2)\" \
+ 	 -DLOCKPGM3=\"$(LOCKPGM3)\" > OSCFLAGS
+ 	echo $(BASELDFLAGS) $(EXTRALDFLAGS) > LDFLAGS
+-	echo "$(ARRC) $(ARCHIVE) $(BINARIES);$(RANLIB) $(ARCHIVE)" > ARCHIVE
++	echo "$(ARRC) $(ARCHIVE) $(BINARIES) $(LIBRARIES);$(RANLIB) $(ARCHIVE)" > ARCHIVE
+ 	echo $(ARCHIVE) > ARCHIVENAME
+ 	echo $(OS) > OSTYPE
+ 	./drivers $(EXTRADRIVERS) $(DEFAULTDRIVERS) dummy

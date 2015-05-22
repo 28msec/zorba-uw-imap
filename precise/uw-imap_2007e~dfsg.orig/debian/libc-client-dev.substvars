@@ -1,0 +1,1 @@
+devlibs:Depends=comerr-dev, libc6-dev, libkrb5-dev, libpam0g-dev, libssl-dev

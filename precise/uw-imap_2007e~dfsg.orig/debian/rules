@@ -1,0 +1,240 @@
+#!/usr/bin/make -f
+# -*- mode: makefile; coding: utf-8 -*-
+# Copyright © 2003-2009 Jonas Smedegaard <dr@jones.dk>
+# Description: Main Debian packaging script for IMAP Toolkit Environment
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2, or (at
+# your option) any later version.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+# 02111-1307 USA.
+
+# This needs to run before cdbs auto-update
+debian/control:: debian/control.in
+DEB_PHONY_RULES += debian/control.in
+debian/control.in::
+	sed $(SEDRULE_CONTENT) <debian/control.in.in >debian/control.in
+
+ifneq (,$(DEB_MAINTAINER_MODE))
+  # Enable stuff not policy compliant (eg. unsuitable for build daemons)
+  DEB_COPYRIGHT_CHECK_STRICT = yes
+  DEB_AUTO_UPDATE_DEBIAN_CONTROL = yes
+endif
+include /usr/share/cdbs/1/class/langcore.mk
+include /usr/share/cdbs/1/rules/debhelper.mk
+include /usr/share/cdbs/1/rules/patchsys-quilt.mk
+include debian/cdbs/1/rules/buildinfo.mk
+include debian/cdbs/1/rules/copyright-check.mk
+include debian/cdbs/1/rules/upstream-tarball.mk
+
+DEB_UPSTREAM_URL = ftp://ftp.cac.washington.edu/mail
+DEB_UPSTREAM_PACKAGE = imap
+DEB_UPSTREAM_TARBALL_EXTENSION = tar.Z
+DEB_UPSTREAM_TARBALL_MD5 = 519d68a8650420ae33eb7085dd6a8150
+
+DEB_UPSTREAM_REPACKAGE_EXCLUDE = docs/rfc docs/draft src/osdep/mac/mtest.sit.hqx
+
+major = 2007e
+minor = 0
+
+SEDRULE_FILENAME = -e 's/__VER__/$(major)/g'
+SEDRULE_CONTENT = -e 's/__LIBVER__/$(major)/g' -e 's/__LIBFULLVER__/$(major).$(minor)/g' -e 's/__VER__/$(major)/g'
+
+SEDRULE_PKGCONTENT = $(SEDRULE_CONTENT) -e 's/__PKG__/$(cdbs_curpkg)/g' -e 's/__CERT__/$(CERT_$(cdbs_curpkg))/g' -e 's/__PAMSERVICE__/$(PAMSERVICE_$(cdbs_curpkg))/g' -e 's/__DESC__/$(DESC_$(cdbs_curpkg))/g' -e 's/__DAEMONSETS__/$(DAEMONSETS_$(cdbs_curpkg))/g'
+SEDPACKAGES = ipopd uw-imapd
+
+CERT_ipopd = ipop3d
+PAMSERVICE_ipopd = pop
+DESC_ipopd = University of Washington POP3 daemon
+DAEMONSETS_ipopd = pop2:ipop2d pop3:ipop3d pop3s:ipop3d
+CERT_uw-imapd = imapd
+PAMSERVICE_uw-imapd = imap
+DESC_uw-imapd = University of Washington IMAP daemon
+DAEMONSETS_uw-imapd = imap2:imapd imap3:imapd imaps:imapd
+
+CFLAGS += -D_REENTRANT -DDISABLE_POP_PROXY
+
+#ZORBA: Enable -fPIC
+CFLAGS += -fPIC
+
+# Suppress seemingly non-fatal warnings to easer spot more important ones.
+CFLAGS += -Wno-parentheses -Wno-strict-aliasing
+#CFLAGS += -Wno-implicit-function-declaration
+
+# Enforce symbol resolution at build time
+# (suggested by Debian Policy 3.6.1 chapter 10.2)
+SHLIBCFLAGS = -Wl,-z,defs
+
+# Enable Kerberos V support
+EXTRAAUTHENTICATORS = gss
+
+# Upstream README is more of a README.build
+DEB_INSTALL_DOCS_ALL =
+
+pre-build::
+	echo "sed $(SEDRULE_CONTENT) <debian/control.in.in | diff -u debian/control.in -"
+	@sed $(SEDRULE_CONTENT) <debian/control.in.in | diff -u debian/control.in - || ( \
+		echo; \
+		echo "Upstream version has changed (or debian/control.in.in is out of sync)"; \
+		echo "Edit debian/control manually, or use the following command:"; \
+		echo "  DEB_AUTO_UPDATE_DEBIAN_CONTROL=yes fakeroot debian/rules clean"; \
+		exit 1)
+
+build: debian/build-stamp
+debian/build-stamp:
+	dh_testdir
+
+	# Debian libc is believed to be IPv6-safe
+	touch ip6
+
+	$(MAKE) VERSION=$(major) EXTRAAUTHENTICATORS='$(EXTRAAUTHENTICATORS)' EXTRACFLAGS='$(CFLAGS)' ldb
+	mv c-client/c-client.a .
+	$(MAKE) clean
+	# Use PAM
+	$(MAKE) VERSION=$(major) EXTRAAUTHENTICATORS='$(EXTRAAUTHENTICATORS)' EXTRACFLAGS='$(CFLAGS)  $(SHLIBCFLAGS)' ldbs
+	pod2man -c "" -r "UW IMAP $(DEB_NOEPOCH_VERSION)" debian/mlock.pod debian/mlock.1
+
+	touch $@
+
+clean::
+	$(MAKE) clean
+	for dir in $(DEB_PATCHDIRS); do rm -f $$dir/*.log; done
+	rm -f c-client.a
+	rm -f debian/build-stamp
+	rm -f debian/mlock.1
+	rm -rf RCS
+	rm -f ip6
+
+# Setup (and tear down) files containing variables static per build
+pre-build::
+	for file in `find debian -maxdepth 2 -type f -name '*.in' -not -name control.in -not -name control.in.in -not -name POTFILES.in`; do \
+		targetfile=`echo $$file | sed $(SEDRULE_FILENAME) -e 's/\\.in$$//'`; \
+		sed $(SEDRULE_CONTENT) <$$file >$$targetfile; \
+	done
+
+clean:: 
+	for file in `find debian -maxdepth 2 -type f -name '*.in' -not -name control.in -not -name control.in.in -not -name README.source.in -not -name POTFILES.in -not -name 'watch.in'`; do \
+		targetfile=`echo $$file | sed $(SEDRULE_FILENAME) -e 's/\\.in$$//'`; \
+		rm -f $$targetfile; \
+	done
+
+# Setup (and tear down) files containing variables static per package
+$(patsubst %,configure/%,$(SEDPACKAGES)) ::
+	for file in `find debian -maxdepth 2 -type f -name '*._in'`; do \
+		targetfile=`echo $$file | sed $(SEDRULE_PKGFILENAME) -e 's/\\._in$$//' -e 's/__PKG__/$(cdbs_curpkg)/g'`; \
+		sed $(SEDRULE_PKGCONTENT) <$$file >$$targetfile; \
+	done
+
+$(patsubst %,binary-post-install/%,$(SEDPACKAGES)) ::
+	if [ "$(cdbs_curpkg)" != "$(PAMSERVICE_$(cdbs_curpkg))" ]; then \
+		mv debian/$(cdbs_curpkg)/etc/pam.d/$(cdbs_curpkg) debian/$(cdbs_curpkg)/etc/pam.d/$(PAMSERVICE_$(cdbs_curpkg)); \
+	fi
+
+clean::
+	for file in `find debian -maxdepth 2 -type f -name '*._in'`; do \
+		for pkg in $(SEDPACKAGES); do \
+			targetfile=`echo $$file | sed $(SEDRULE_PKGFILENAME) -e 's/\\._in$$//' -e "s/__PKG__/$$pkg/g"`; \
+			rm -f $$targetfile; \
+		done; \
+	done
+
+# Install libs and resolve dev package dependencies
+common-install-arch::
+	mkdir -p debian/tmp/usr/lib
+	install -m 0644 c-client.a debian/tmp/usr/lib/libc-client.a
+	install -m 0644 c-client/libc-client.so debian/tmp/usr/lib/libc-client.so.$(major).$(minor)
+	ln -s libc-client.so.$(major).$(minor) debian/tmp/usr/lib/libc-client.so.$(major)
+	ln -s libc-client.so.$(major).$(minor) debian/tmp/usr/lib/libc-client.so
+	mkdir -p debian/tmp/usr/include/c-client
+	install -m 0644 -t debian/tmp/usr/include/c-client \
+		src/c-client/*.h \
+		src/osdep/unix/*.h \
+		c-client/auths.c \
+		c-client/linkage.c \
+		c-client/linkage.h \
+		c-client/osdep.h
+
+common-binary-post-install-arch:: debian/install-libs-stamp
+
+debian/install-libs-stamp:
+	d-devlibdeps \
+		debian/libc-client-dev.substvars \
+		debian/tmp/usr/lib/libc-client.so
+	d-shlibmove --commit \
+		--movedev "debian/tmp/usr/include/*" usr/include \
+		debian/tmp/usr/lib/libc-client.so
+	touch $@
+
+clean::
+	rm -f debian/install-libs-stamp
+
+binary-predeb/ipopd::
+	chown root.mail debian/$(cdbs_curpkg)/usr/sbin/ipop2d
+	chown root.mail debian/$(cdbs_curpkg)/usr/sbin/ipop3d
+	chmod 2755 debian/$(cdbs_curpkg)/usr/sbin/ipop2d
+	chmod 2755 debian/$(cdbs_curpkg)/usr/sbin/ipop3d
+
+binary-predeb/uw-imapd::
+	chown root.mail debian/$(cdbs_curpkg)/usr/sbin/imapd
+	chmod 2755 debian/$(cdbs_curpkg)/usr/sbin/imapd
+
+binary-predeb/mlock::
+	chown root.mail debian/$(cdbs_curpkg)/usr/bin/mlock
+	chmod 2755 debian/$(cdbs_curpkg)/usr/bin/mlock
+
+# Make sure debconf translations are always up-todate
+clean::
+	debconf-updatepo
+
+# Refuse to ship with nonfree RFC files in source
+clean::
+	@echo "-find -name '*.txt' | grep rfc"
+	@-find -name '*.txt' | grep rfc && ( \
+		echo; \
+		echo "ERROR: RFC documents found!"; \
+		echo "RFC documents possibly do not comply with the Debian Free Software"; \
+		echo "Guidelines, and thus better be stripped from the source tarball!"; \
+		exit 1)
+
+# Needed by upstream build process
+CDBS_BUILD_DEPENDS := $(CDBS_BUILD_DEPENDS), libpam-dev, libkrb5-dev, comerr-dev, libssl-dev
+
+# Needed for our packaging routines
+CDBS_BUILD_DEPENDS := $(CDBS_BUILD_DEPENDS), d-shlibs, perl, po-debconf
+
+# Needed (always/often/seldom) at runtime
+#  * openssl used in postinst scripts for creating certificate
+CDBS_DEPENDS_uw-imapd = openssl, libpam-runtime (>= 1.0.1-11), openbsd-inetd | inet-superserver
+CDBS_DEPENDS_ipopd = openssl, libpam-runtime (>= 1.0.1-11), openbsd-inetd | inet-superserver
+CDBS_DEPENDS_libc-client$(major) = libpam-modules, mlock
+CDBS_RECOMMENDS_uw-imapd = default-mta | mail-transport-agent
+CDBS_RECOMMENDS_ipopd = default-mta | mail-transport-agent
+CDBS_SUGGESTS_uw-imapd = mutt | imap-client, logcheck
+CDBS_SUGGESTS_ipopd = logcheck
+CDBS_SUGGESTS_libc-client$(major) = uw-mailutils
+
+# Provide virtual packages for common services
+CDBS_CONFLICTS_uw-imapd = imap-server
+CDBS_PROVIDES_uw-imapd = imap-server
+CDBS_CONFLICTS_ipopd = pop3-server
+CDBS_PROVIDES_ipopd = pop3-server
+
+# Explicitly conflict with packages shipping identically named files
+#  * courier-imap: imapd binary, imapd.8 man page and imap PAM file
+#  * cyrus-imapd-2.2, kolab-cyrus-imapd: imapd.8 man page and imap PAM file
+#  * kolab-cyrus-imapd: imapd.8 man page
+#  * cyrus-pop3d: pop PAM file
+CDBS_CONFLICTS_uw-imapd += , courier-imap, cyrus-imapd-2.2, kolab-cyrus-imapd
+CDBS_CONFLICTS_ipopd += , cyrus-pop3d
+
+# Resolve, cleanup and apply CDBS-declared dependencies
+include debian/cdbs/1/rules/package-relations.mk

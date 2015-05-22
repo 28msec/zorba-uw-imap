@@ -1,0 +1,41 @@
+UW IMAP IPMAPD __VER__ FOR DEBIAN
+=================================
+
+[Note: imap uses the c-client library for most of the actual work of
+handling mail.  So you should read the documentation in
+/usr/share/doc/libc-client__VER__/ too.]
+
+
+SSL/TLS support
+===============
+
+This package has been compiled with SSL support.  On installation it will
+generate a self-signed certificate for you in /etc/ssl/certs/imapd.pem.  
+This certificate will expire in one year. You can replace this with a
+cerificate from verisign etc. if you want.  Or you can follow the instructions 
+in the openssl package to generate your own.
+
+
+Authentication
+==============
+
+This package uses PAM for authentication.  The configuration file is 
+/etc/pam.d/imap
+
+It has also been compiled with CRAM-MD5 SASL support.
+See /usr/share/doc/libc-client__VER__/md5.txt for additional information.
+NOTE:  If your users seem to have problems logging in, this is the first
+thing to check.
+
+It also has Kerberos support via GSSAPI.  Here's how to enable it.
+
+  * Create imap/hostname@REALM keytab using kadmin.local
+  * add the resulting key to /etc/krb5.conf on the imap server
+  * Make sure that libsasl-gssapi-mit is installed on the clients
+  * get Kerberos tickets
+
+(thanks Sam Hartman)
+
+
+Jaldhar H. Vyas <jaldhar@debian.org>, Sun, 20 Oct 2002 23:57:00 -0500
+Updates: Jonas Smedegaard <dr@jones.dk>  Sat, 15 Mar 2003 21:10:00 +0100

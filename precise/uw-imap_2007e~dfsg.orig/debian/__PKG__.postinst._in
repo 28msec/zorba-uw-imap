@@ -1,0 +1,107 @@
+#!/bin/sh
+
+set -e
+
+inetgroup="mail"	# inetd group
+pkg="__PKG__"	# basename of package
+cert="__CERT__"	# basename of certificate
+description="__DESC__"	# descriptive text
+daemonsets="__DAEMONSETS__"	# space-seperated list of colon-seperated list of port and binary name (or path if not /usr/sbin)
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+db_get "$pkg/force_debconf_choice"
+debconf_enforce="$RET"
+
+inetd_do_service() {
+	case "$INETD_ACTION" in
+	    add)
+		update-inetd --group "$inetgroup" --add "$1\tstream\ttcp\tnowait\troot\t/usr/sbin/tcpd $2"
+		;;
+	    enable)
+		update-inetd --enable "$1"
+		;;
+	    *)
+		echo "ERROR: Unknown inetd action \"$INETD_ACTION\" while doing service \"$1\"" >/dev/stderr
+		exit 1
+	esac
+}
+
+if [ "$1" = "configure" ]; then
+	if [ -z "$2" ]; then
+		INETD_ACTION="add"
+	else
+		if [ "$debconf_enforce" = "true" ]; then
+			INETD_ACTION="add"
+		else
+			INETD_ACTION="enable"
+		fi
+
+		# Bug#295306
+		if dpkg --compare-versions "$2" le 7:2002edebian1-6; then
+			cachefile=/var/cache/${pkg}_inetd.conf_copy
+			if [ -r "$cachefile" ]; then
+				while read line; do
+					update-inetd --group "$inetgroup" --add "$line"
+				done < "$cachefile"
+				rm -f "$cachefile"
+			else
+				# The file has disappeared, or we're installing from
+				# 'config files' state. Install default entries.
+				INETD_ACTION="add"
+			fi
+		fi
+	fi
+
+	db_get "$pkg/protocol"
+	debconf_entries="`echo "$RET" | tr ',' ' '`"
+	for daemonset in $daemonsets; do
+		seen=""
+		service="`echo "$daemonset" | awk -F: '{ print $1 }'`"
+		binary="`echo "$daemonset" | awk -F: '{ print $2 }' | sed 's,^\([^/]\),/usr/sbin/\1,'`"
+		for debconf_entry in $debconf_entries; do
+			if [ "$debconf_entry" = "$service" ]; then
+				inetd_do_service "$service" "$binary"
+				seen="yes"
+				break
+			fi
+		done
+		if [ "$seen" != "yes" ]; then
+			if [ "$debconf_enforce" = "true" ]; then
+				update-inetd --disable "$service"
+			else
+				echo "WARNING: Port \"$service\" unselected in debconf but possibly handled locally." >/dev/stderr
+			fi
+		fi
+	done
+fi
+
+cd /etc/ssl/certs
+PATH=$PATH:/usr/bin/ssl
+if [ -f "$cert.pem" ]; then
+	echo "You already have /etc/ssl/certs/$cert.pem"
+else
+	echo "Creating generic self-signed certificate: /etc/ssl/certs/$cert.pem"
+	echo "(replace with hand-crafted or authorized one if needed)."
+	hostname=`hostname -s`
+	FQDN=`hostname -f`
+	MAILNAME=`cat /etc/mailname 2> /dev/null || hostname -f`
+	openssl req -new -x509 -days 365 -nodes -out "$cert.pem" -keyout "$cert.pem" > /dev/null 2>&1 <<+
+.
+.
+.
+$description
+$hostname
+$FQDN
+root@$MAILNAME
++
+	ln -sf "$cert.pem" `openssl x509 -noout -hash < "$cert.pem"`.0
+	chown root:root "/etc/ssl/certs/$cert.pem"
+	chmod 0640 "/etc/ssl/certs/$cert.pem"
+fi
+ 
+#DEBHELPER#
+
+exit 0

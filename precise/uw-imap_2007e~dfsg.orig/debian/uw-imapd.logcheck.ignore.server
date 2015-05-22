@@ -1,0 +1,5 @@
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ imapd\[[0-9]+\]: (Broken pipe|Command stream end of file|Connection (reset by peer|timed out)|No route to host|Transport endpoint is not connected)(,)? while (reading (authentication|line|literal|char)|writing text) (user=[^[:space:]]+ )?host=(([^[:space:]]+ )?\[[\.0-9]+\]|NON-IPv4|UNKNOWN)$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ imapd\[[0-9]+\]: (connect|(port (143|220)|imap(s SSL)?) service init) from [^[:space:]]+( \([\.0-9]+\))?$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ imapd\[[0-9]+\]: Killed \(lost mailbox lock\) user=[^[:space:]]+ host=(([^[:space:]]+ )?\[[\.0-9]+\]|NON-IPv4|UNKNOWN)$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ imapd\[[0-9]+\]: (Login|Auth|(A|Prea)uthenticated|Logout|Autologout) user=[^[:space:]]+ host=(([^[:space:]]+ )?\[[\.0-9]+\]|NON-IPv4|UNKNOWN)( nmsgs=[/0-9]+( ndele=[0-9]+)?)?$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ imapd\[[0-9]+\]: Moved [0-9]+ bytes of new mail to [^[:space:]]+ from [^[:space:]]+ host= (([^[:space:]]+ )?\[[\.0-9]+\]|NON-IPv4|UNKNOWN)$

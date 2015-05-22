@@ -1,0 +1,21 @@
+diff -ruN uw-imap-2006d.dfsg.orig/src/osdep/unix/Makefile uw-imap-2006d.dfsg/src/osdep/unix/Makefile
+--- uw-imap-2006d.dfsg.orig/src/osdep/unix/Makefile	2006-12-19 22:45:56.000000000 +0100
++++ uw-imap-2006d.dfsg/src/osdep/unix/Makefile	2006-12-19 22:47:12.000000000 +0100
+@@ -486,7 +486,7 @@
+ lnp:	# Linux Pluggable Authentication modules
+ 	$(BUILD) `$(CAT) SPECIALS` OS=slx \
+ 	 SIGTYPE=psx CHECKPW=pam CRXTYPE=nfs \
+-	 SPOOLDIR=/var/spool \
++	 SPOOLDIR=/var/spool MAILSPOOL=/var/mail \
+ 	 ACTIVEFILE=/var/lib/news/active \
+ 	 RSHPATH=/usr/bin/rsh \
+ 	 BASECFLAGS="$(GCCCFLAGS)" \
+@@ -495,7 +495,7 @@
+ lnps:	# Linux Pluggable Authentication modules (c-client as shared lib)
+ 	$(BUILD) `$(CAT) SPECIALS` OS=lnx \
+ 	 SIGTYPE=psx CHECKPW=pam CRXTYPE=nfs \
+-	 SPOOLDIR=/var/spool \
++	 SPOOLDIR=/var/spool MAILSPOOL=/var/mail \
+ 	 ACTIVEFILE=/var/lib/news/active \
+ 	 RSHPATH=/usr/bin/rsh \
+ 	 BASECFLAGS="-fPIC $(GCCCFLAGS)" \

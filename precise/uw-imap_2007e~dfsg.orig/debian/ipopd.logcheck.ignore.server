@@ -1,0 +1,9 @@
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ ipop[23]d\[[0-9]+\]: (Broken pipe|Command stream end of file|Connection (reset by peer|timed out)|No route to host|Transport endpoint is not connected)(,)? while (reading (authentication|line|literal|char)|writing text) (user=[^[:space:]]+ )?host=(([^[:space:]]+ )?\[[\.0-9]+\]|NON-IPv4|UNKNOWN)$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ ipop[23]d\[[0-9]+\]: (connect|(pop3(s SSL)?) service init) from [^[:space:]]+( \([\.0-9]+\))?$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ ipop[23]d\[[0-9]+\]: Killed \(lost mailbox lock\) user=[^[:space:]]+ host=(([^[:space:]]+ )?\[[\.0-9]+\]|NON-IPv4|UNKNOWN)$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ ipop[23]d\[[0-9]+\]: (Login|APOP|Auth|(A|Prea)uthenticated|Logout|Autologout) user=[^[:space:]]+ host=(([^[:space:]]+ )?\[[\.0-9]+\]|NON-IPv4|UNKNOWN)( nmsgs=[/0-9]+( ndele=[0-9]+)?)?$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ ipop[23]d\[[0-9]+\]: Moved [0-9]+ bytes of new mail to [^[:space:]]+ from [^[:space:]]+ host= (([^[:space:]]+ )?\[[\.0-9]+\]|NON-IPv4|UNKNOWN)$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ ipop[32]d\[[0-9]+\]: Error opening or locking INBOX user=[^[:space:]]+ host=[^[:space:]]+( \[[\.0-9]+\])?$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ ipop[32]d\[[0-9]+\]: Expunge ignored on readonly mailbox
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ ipop[32]d\[[0-9]+\]: Mailbox is open by another process, access is readonly
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ ipop[32]d\[[0-9]+\]: Trying to get mailbox lock from process [0-9]+

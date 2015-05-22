@@ -1,0 +1,183 @@
+# Translation of openldap debconf templates to German
+# Copyright (C) Matthias Julius <mdeb@julius-net.net>, 2006.
+# Copyright (C) Helge Kreutzmann <debian@helgefjell.de>, 2007.
+# This file is distributed under the same license as the openldap package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: uw-imap 7:2006j2.dfsg-4\n"
+"Report-Msgid-Bugs-To: dr@jones.dk\n"
+"POT-Creation-Date: 2007-10-19 20:29+0200\n"
+"PO-Revision-Date: 2007-10-28 17:54+0100\n"
+"Last-Translator: Helge Kreutzmann <debian@helgefjell.de>\n"
+"Language-Team: de <debian-l10n-german@lists.debian.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: multiselect
+#. Description
+#: ../ipopd.templates:2001 ../uw-imapd.templates:2001
+msgid "Server ports and protocols to support:"
+msgstr "Server-Ports und Protokolle, die unterstützt werden sollen:"
+
+#. Type: multiselect
+#. Description
+#: ../ipopd.templates:2001 ../uw-imapd.templates:2001
+msgid "Please choose the server ports and protocols to activate."
+msgstr "Bitte wählen Sie die zu aktivierenden Server-Ports und Protokolle."
+
+#. Type: multiselect
+#. Description
+#: ../ipopd.templates:2001
+msgid ""
+" pop3:  POP 3 on TCP port 110 with TLS support;\n"
+" pop3s: POP 3 on TCP port 995 with SSL support;\n"
+" pop2:  (obsolete) POP 2 on TCP port 109 with TLS support."
+msgstr ""
+" pop3:  POP 3 auf TCP-Port 110 mit TLS-Unterstützung;\n"
+" pop3s: POP 3 auf TCP-Port 995 mit SSL-Unterstützung;\n"
+" pop2:  (veraltet) POP 2 auf TCP-Port 109 mit TLS-Unterstützung."
+
+#. Type: multiselect
+#. Description
+#: ../ipopd.templates:2001
+msgid "It is recommended to activate both pop3 and pop3s."
+msgstr "Es wird empfohlen, sowohl pop3 als auch pop3s zu aktivieren."
+
+#. Type: multiselect
+#. Description
+#. Type: boolean
+#. Description
+#: ../ipopd.templates:2001 ../ipopd.templates:3001
+msgid ""
+"As the ports and protocols choice may have been overridden by local changes, "
+"you may need to enforce the choice and run the package configuration again "
+"with 'dpkg-reconfigure ipopd'."
+msgstr ""
+"Da die Auswahl an Ports und Protokollen durch lokale Änderungen "
+"überschrieben sein könnten, müssen Sie eventuell die Auswahl erzwingen und "
+"die Paketkonfiguration mit »dpkg-reconfigure ipopd« erneut ausführen."
+
+#. Type: boolean
+#. Description
+#: ../ipopd.templates:3001 ../uw-imapd.templates:3001
+msgid "Enforce port selection?"
+msgstr "Port-Auswahl erzwingen?"
+
+#. Type: boolean
+#. Description
+#: ../ipopd.templates:3001
+msgid "The ipopd daemon supports listening simultaneously on several ports."
+msgstr "Der ipopd-Daemon kann auf mehreren Ports simultan auf Anfragen warten."
+
+#. Type: multiselect
+#. Description
+#: ../uw-imapd.templates:2001
+msgid ""
+" imap2: IMAP 4rev1 on TCP port 143 with TLS support;\n"
+" imaps: IMAP 4rev1 on TCP port 993 with SSL support;\n"
+" imap3: (obsolete) IMAP 3 on TCP port 220 with TLS support."
+msgstr ""
+" imap2: IMAP 4rev1 auf TCP-Port 143 mit TLS-Unterstützung;\n"
+" imaps: IMAP 4rev1 auf TCP-Port 993 mit SSL-Unterstützung;\n"
+" imap3: (veraltet) IMAP 3 auf TCP-Port 220 mit TLS-Unterstützung."
+
+#. Type: multiselect
+#. Description
+#: ../uw-imapd.templates:2001
+msgid "It is recommended to activate both imap2 and imaps."
+msgstr "Es wird empfohlen, sowohl imap2 als auch imaps zu aktivieren."
+
+#. Type: multiselect
+#. Description
+#. Type: boolean
+#. Description
+#: ../uw-imapd.templates:2001 ../uw-imapd.templates:3001
+msgid ""
+"As the ports and protocols choice may have been overridden by local changes, "
+"you may need to enforce the choice and run the package configuration again "
+"with 'dpkg-reconfigure uw-imapd'."
+msgstr ""
+"Da die Auswahl an Ports und Protokollen durch lokale Änderungen "
+"überschrieben sein könnten, müssen Sie eventuell die Auswahl erzwingen und "
+"die Paketkonfiguration mit »dpkg-reconfigure uw-imapd« erneut ausführen."
+
+#. Type: boolean
+#. Description
+#: ../uw-imapd.templates:3001
+msgid "The uw-imap daemon supports listening simultaneously on several ports."
+msgstr ""
+"Der uw-imap-Daemon kann auf mehreren Ports simultan auf Anfragen warten."
+
+#~ msgid "pop2 =  POP 2 on TCP port 109 with TLS support.  This is obsolete."
+#~ msgstr ""
+#~ "pop2 =  POP 2 auf TCP-Port 109 mit TLS-Unterstützung. Dies ist veraltet."
+
+#~ msgid "pop3  = POP 3 on TCP port 110 with TLS support."
+#~ msgstr "pop3 =  POP 3 auf TCP-Port 110 mit TLS-Unterstützung."
+
+#~ msgid "pop3s = POP 3 on TCP port 995 with SSL support."
+#~ msgstr "pop3s = POP 3 auf TCP-Port 995 mit SSL-Unterstützung."
+
+#~ msgid "If in doubt, choose pop3 and pop3s."
+#~ msgstr "Falls Sie sich nicht sicher sind, wählen Sie pop3 und pop3s."
+
+#~ msgid ""
+#~ "By default the port selection is respected only on initial installs, and "
+#~ "is ignored on later updates and reconfiguration."
+#~ msgstr ""
+#~ "Standardmäßig wird die Port-Auswahl nur bei der ersten Installation "
+#~ "beachtet und bei einer späteren erneuten Konfiguration ignoriert."
+
+#~ msgid ""
+#~ "imap2 = IMAP 4Rev1 (not 2, strangely enough) on TCP port 143 with TLS "
+#~ "support."
+#~ msgstr ""
+#~ "imap2 = IMAP 4Rev1 (nicht 2, seltsamerweise) auf TCP-Port 143 mit TLS-"
+#~ "Unterstützung."
+
+#~ msgid "imap3 = IMAP 3 on TCP port 220 with TLS support.  This is obsolete."
+#~ msgstr ""
+#~ "imap3 = IMAP 3 auf TCP-Port 220 mit TLS-Unterstützung. Dies ist veraltet."
+
+#~ msgid "imaps = IMAP 4Rev1 on TCP port 993 with SSL support."
+#~ msgstr "imaps = IMAP 4Rev1 auf TCP-Port 993 mit SSL-Unterstützung."
+
+#~ msgid "If in doubt, choose imap2 and imaps."
+#~ msgstr "Falls Sie sich nicht sicher sind, wählen Sie imap2 und imaps."
+
+#~ msgid "Which ports should the server listen on?"
+#~ msgstr "Welche Ports soll der Server verwenden?"
+
+#~ msgid ""
+#~ "Do you want to ignore possible local tweaks and always use selected ports?"
+#~ msgstr ""
+#~ "Wollen Sie mögliche lokale Anpassungen ignorieren und immer die "
+#~ "ausgewählten Ports verwenden?"
+
+#~ msgid "Continue installing libc-client without Maildir support?"
+#~ msgstr ""
+#~ "Die Installation von libc-client ohne Maildir-Unterstützung fortsetzen?"
+
+#~ msgid ""
+#~ "Libc-client earlier than version 2002d (and development versions of 2003) "
+#~ "included an unofficial and no longer maintained patch to support "
+#~ "Maildirs. By default Maildirs were not used by uw-imapd or ipopd, but if "
+#~ "you have changed your system configuration or other installed programs "
+#~ "depend on libc-client then upgrading may result in broken mail handling."
+#~ msgstr ""
+#~ "Libc-client-Versionen, die älter als Version 2002d sind (und "
+#~ "Entwicklerversionen von 2003) enthielten einen nichtoffiziellen und nicht "
+#~ "mehr gepflegten Patch zur Maildir-Unterstützung. In der Voreinstellung "
+#~ "wurden Maildirs von uw-imapd oder ipopd nicht verwendet. Aber wenn Sie "
+#~ "Ihre Systemeinstellungen geändert haben oder wenn andere installierte "
+#~ "Programme von libc-client abhängen, kann das Upgrade zu einer defekten E-"
+#~ "Mail-Verarbeitung führen."
+
+#~ msgid ""
+#~ "Do you want to continue installing a libc-client without Maildir support?"
+#~ msgstr ""
+#~ "Wollen Sie die Installation von libc-client ohne Maildir-Unterstützung "
+#~ "fortsetzen?"
